@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CrystalsCollector</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	
+</head>
+<body>
+	<h1>CrystalsCollector!</h1>
+
+	<br>
+
+	<div>
+		<h2>Wins: </h2>
+		<p id="wins"></p><br>
+
+		<h2>Losses: </h2>
+		<p id="losses"></p><br>
+
+		<h2>The winning number is: </h2>
+		<p id="winNumber"></p><br>
+
+	</div>	
+
+		<div>
+			<img src="assets/images/red.png" id="redGem" style="width:100px;height:100px;">
+			<img src="assets/images/yellow.png" id="yellowGem" style="width:100px;height:100px;">
+			<img src="assets/images/blue.png" id="blueGem" style="width:100px;height:100px;">
+			<img src="assets/images/green.png" id="greenGem" style="width:100px;height:100px;">
+		</div>
+
+	<h2>Your current score is: </h2>
+	<p id="currentScore"></p>
+
+	<script>
+		
+		function randNumGen(min,max) {
+			return Math.floor(Math.random()*(max-min+1)+min);
+		}
+
+
+		function testWin() {
+			if(currentScore == winNumber){
+				wins++;
+				resetNumbers();
+				print();
+			}
+			else if(currentScore > winNumber){
+				losses++;
+				resetNumbers();
+				print();
+			}
+			else{
+				print();
+			}
+		}
+
+		function print() {
+			document.getElementById("wins").innerHTML = wins;
+			document.getElementById("losses").innerHTML = losses;
+			document.getElementById("winNumber").innerHTML = winNumber;
+			document.getElementById("currentScore").innerHTML = currentScore;
+		}
+
+
+		function resetNumbers() {
+			winNumber = randNumGen(19,120);
+			currentScore = 0;
+
+			redValue = randNumGen(1,12);
+			yellowValue = randNumGen(1,12);
+			blueValue = randNumGen(1,12);
+			greenValue = randNumGen(1,12);
+		}
+
+		
+
+		var winNumber = randNumGen(19,120);
+		var wins = 0;
+		var losses = 0;
+		var currentScore = 0;
+
+		var redValue = randNumGen(1,12);
+		var yellowValue = randNumGen(1,12);
+		var blueValue = randNumGen(1,12);
+		var greenValue = randNumGen(1,12);
+
+		document.getElementById("winNumber").innerHTML = winNumber;
+		document.getElementById("wins").innerHTML = wins;
+		document.getElementById("losses").innerHTML = losses;
+		document.getElementById("currentScore").innerHTML = currentScore;
+
+		$("#redGem").click(function(){
+			currentScore += redValue;	
+			testWin();
+		});
+
+		$("#yellowGem").click(function(){
+			currentScore += yellowValue;	
+			testWin();
+		});
+
+		$("#blueGem").click(function(){
+			currentScore += blueValue;	
+			testWin();
+		});
+
+		$("#greenGem").click(function(){
+			currentScore += greenValue;	
+			testWin();
+		});
+
+
+	</script>
+
+</body>
+	
+</html>
